@@ -28,13 +28,14 @@
     place_id INTEGER,
     tag_id INTEGER,
     FOREIGN KEY(place_id) REFERENCES place(id),
-    FOREIGN KEY(tag_id) REFERENCES tag(id),
+    FOREIGN KEY(tag_id) REFERENCES tag(id)
   )');
 
-  $db->exec('INSERT INTO place (title, latitude, longitude, opens_at, closes_at) VALUES(
-    "store",
-    11,
-    12,
+  $db->exec('INSERT INTO place (title, description, latitude, longitude, opens_at, closes_at) VALUES(
+    "Stockmann",
+    "Stockmann Helsinki Centre is a culturally significant business building and department store located in the centre of Helsinki, Finland.",
+    60.1683,
+    24.9422,
     time("09:00"),
     time("21:00")
   )');
