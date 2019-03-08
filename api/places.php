@@ -14,6 +14,10 @@
     echo json_encode(array("error"=>$error));
   }
 
+  function show_success($data = []) {
+    echo json_encode(array_merge(array("success"=>true), $data));
+  }
+
   function check_errors($data) {
     if (!isset($data->title) || empty($data->title)) return show_error('Title is required');
     if (!isset($data->latitude) || empty($data->latitude)) return show_error('Latitude is required');
@@ -68,7 +72,7 @@
     $stmt->bindParam(':closes_at', $data->closes_at, PDO::PARAM_STR);
 
     $success = $stmt->execute();
-    echo 'success';
+    show_success();
   }
 
 

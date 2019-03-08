@@ -1,41 +1,166 @@
-body {
-  background-color: #f6f6f6;
-}
-body .wrapper {
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+.wrapper {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-body .wrapper .card {
+.wrapper .card {
   display: flex;
   width: 1200px;
   height: 750px;
+  position: relative;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 6px;
+  overflow: hidden;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
-body .wrapper .card .map {
+.wrapper .card .map {
   flex: 1;
 }
-body .wrapper .card .sidebar {
-  padding: 1rem;
-  background-color: #3b7f81;
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  color: #f6f6f6;
 }
-body .wrapper .card .sidebar .search-container {
+.form-container form h4 {
+  margin-bottom: 0.5rem;
+  margin-top: 1.25rem;
+}
+.form-container form p {
+  margin: 0;
+  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+.form-container form label {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.form-container form input {
+  margin: 4px 0px 1rem 2px;
+  font-family: "Open Sans", sans-serif;
+}
+.form-container form textarea {
+  margin: 4px 0px 1rem 4px;
+  resize: vertical;
+  margin-bottom: 1rem;
+}
+.form-container form .opening-hours {
+  display: flex;
+}
+.form-container form .opening-hours .container {
+  flex: 1;
+}
+.form-container form .opening-hours .container:nth-of-type(1) {
+  margin-right: 0.5rem;
+}
+.form-container form .opening-hours .container:nth-of-type(2) {
+  margin-left: 0.5rem;
+}
+.form-container form .opening-hours .container input {
+  width: calc(100% - 4px);
+}
+
+.sidebar {
+  padding: 1rem;
+  max-width: 220px;
+  background-color: #2d7274;
+  z-index: 10;
+}
+.sidebar .search-container {
   height: 2.25rem;
   display: flex;
   box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
 }
-body .wrapper .card .sidebar .search-container input {
-  border: none;
+.sidebar .search-container input {
   border-radius: 2px 0px 0px 2px;
+  flex: 1;
+}
+
+button {
+  padding: 0.5rem;
+  color: #f6f6f6;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background-color: #ffc09d;
+  text-shadow: 1px 1px 4px rgba(47, 32, 23, 0.2);
+}
+
+#search-btn {
+  border-radius: 0px 2px 2px 0px;
+  padding: 1px 6px;
+}
+
+#submit-btn {
   padding: 0.5rem;
 }
-body .wrapper .card .sidebar .search-container button {
+
+.edit-btn {
+  width: 100%;
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  max-width: 260px;
+  right: 252px;
+  padding: 1rem;
+  height: 100%;
+  overflow: scroll;
+  z-index: 1;
+}
+.overlay .place-container {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
+}
+.overlay .place-container .title,
+.overlay .place-container .coordinates {
+  margin: 0;
+}
+.overlay .place-container .title,
+.overlay .place-container .opening-hours {
+  color: #2d7274;
+}
+.overlay .place-container .coordinates {
+  color: #6a6a6a;
+  font-size: 0.6875rem;
+}
+.overlay .place-container .description {
+  color: #6a6a6a;
+}
+
+.active {
+  display: block;
+}
+
+h4 {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+input,
+textarea {
   border: none;
-  border-radius: 0px 2px 2px 0px;
-  background-color: #ff9c81;
+  border-radius: 2px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #f6f6f6;
+  font-family: "Open Sans", sans-serif;
 }
 
 /*# sourceMappingURL=main.css.map */

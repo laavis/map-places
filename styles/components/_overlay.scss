@@ -1,0 +1,42 @@
+.overlay {
+  display: none;
+  position: absolute;
+  max-width: 260px;
+  right: 252px;
+  padding: 1rem;
+  height: 100%;
+  overflow: scroll;
+  z-index: 1;
+
+  .place-container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    border-radius: 4px;
+    background-color: $color_white;
+    box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
+
+    .title,
+    .coordinates {
+      margin: 0;
+    }
+
+    .title,
+    .opening-hours {
+      color: $color_primary;
+    }
+
+    .coordinates {
+      color: $color_text-grey;
+      font-size: 0.6875rem;
+    }
+
+    .description {
+      color: $color_text-grey;
+    }
+  }
+}
+
+.active {
+  display: block;
+}

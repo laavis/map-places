@@ -245,8 +245,8 @@ function initMap() {
   });
 
   map.addListener('click', e => {
-    setCoordinates(e, map);
-    getCoordinates(e);
+    getCoordinates(e, map);
+    setCoordinates(e);
   });
 
   marker.addListener('click', () => {
@@ -255,15 +255,18 @@ function initMap() {
   });
 }
 
-const getCoordinates = e => {
+const setCoordinates = e => {
   let coordinates = [];
   let latitude = e.latLng.lat();
   let longitude = e.latLng.lng();
-  coordinates.push(latitude, longitude);
-  console.log(coordinates);
+  const latitudeInput = document.getElementById('latitude');
+  const longitudeInput = document.getElementById('longitude');
+
+  latitudeInput.value = latitude;
+  longitudeInput.value = longitude;
 };
 
-const setCoordinates = (e, map) => {
+const getCoordinates = (e, map) => {
   let latitude = e.latLng.lat();
   let longitude = e.latLng.lng();
   console.log(latitude + ' ' + longitude);

@@ -1,48 +1,29 @@
 @import 'variables';
+@import 'components/card.scss';
+@import 'components/form.scss';
+@import 'components/sidebar.scss';
+@import 'components/buttons.scss';
+@import 'components/overlay.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+
+h4 {
+  text-transform: uppercase;
+  font-weight: $font_bold;
+  letter-spacing: 2px;
+}
+
+input,
+textarea {
+  border: none;
+  border-radius: 2px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-family: $font_body;
+}
 
 body {
-  background-color: $color_background;
-
-  .wrapper {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .card {
-      display: flex;
-      width: 1200px;
-      height: 750px;
-      background-color: $color_card;
-      border-radius: 10px;
-      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-
-      .map {
-        flex: 1;
-      }
-
-      .sidebar {
-        padding: 1rem;
-        background-color: $color_primary;
-
-        .search-container {
-          height: 2.25rem;
-          display: flex;
-          box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
-
-          input {
-            border: none;
-            border-radius: 2px 0px 0px 2px;
-            padding: 0.5rem;
-          }
-
-          button {
-            border: none;
-            border-radius: 0px 2px 2px 0px;
-            background-color: $color_contrast;
-          }
-        }
-      }
-    }
-  }
+  background-color: $color_light;
+  font-family: $font_body;
 }
