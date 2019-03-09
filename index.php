@@ -16,8 +16,8 @@
   <div class="wrapper">
     <div class="card">
       <div id="map" class="map"></div>
-      <div id="overlay" class="overlay"></div>
-      <aside class="sidebar">
+      <div id="overlay" class="saved-places-overlay"></div>
+      <aside id="sidebar" class="sidebar">
         <div class="search-container">
           <input class="search" type="search" placeholder="Search">
           <button id="search-btn">
@@ -28,7 +28,7 @@
         </div>
         <div class="form-container">
           <form id="form">
-            <h4>Add Place</h4>
+            <h4 id="form-function">Add Place</h4>
             <p>Type the coordinates or click on the map</p>
 
             <label for="latitude">Latitude</label>
@@ -55,7 +55,9 @@
               </div>
             </div>
 
-            <button id="submit" type="submit" >Add</button>
+            <button id="submit-btn" type="submit" name="action" value="add">Add</button>
+            <button id="save-btn" type="submit" name="action" value="update">Save</button>
+            <button id="cancel-btn">Cancel</button>
           </form>
         </div>
         <button id="my-places-btn">My Places</button>

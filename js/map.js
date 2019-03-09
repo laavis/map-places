@@ -238,11 +238,8 @@ function initMap() {
     ]
   });
 
-  const marker = new google.maps.Marker({
-    position: helsinki,
-    map: map,
-    title: 'Click to zoom'
-  });
+  // initialize marker
+  const marker = new google.maps.Marker({});
 
   map.addListener('click', e => {
     getCoordinates(e, map);
@@ -253,6 +250,8 @@ function initMap() {
     map.setZoom(8);
     map.setCenter(marker.getPosition());
   });
+
+  getPlacesCoordinates(map, marker);
 }
 
 const setCoordinates = e => {
@@ -285,4 +284,34 @@ const getCoordinates = (e, map) => {
 
   // Center of map
   map.panTo(new google.maps.LatLng(latitude, longitude));
+};
+
+const getPlacesCoordinates = (map, marker) => {
+  const settings = {
+    method: 'get'
+  };
+
+  fetch('api/places.php', settings)
+    .then(res => res.json())
+    .then(places => {
+      for (place in places) {
+        const latLng = {
+          lat: parseFloat(places[place].latitude),
+          lng: parseFloat(places[place].longitude)
+        };
+        createMarker(latLng, map, places[place].title);
+      }
+    })
+    .catch(console.error());
+
+  marker.setMap(map);
+};
+
+const createMarker = (latLng, map, title) => {
+  const marker = new google.maps.Marker({
+    position: latLng,
+    map: map,
+    animation: google.maps.Animation.DROP,
+    title: title
+  });
 };

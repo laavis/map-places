@@ -101,21 +101,31 @@ button {
   padding: 0.5rem;
 }
 
+#save-btn {
+  display: none;
+}
+
+#cancel-btn {
+  display: none;
+  background: none;
+  border: 1px solid #ffc09d;
+  margin-top: 1rem;
+}
+
 .edit-btn {
   width: 100%;
 }
 
-.overlay {
-  display: none;
+.saved-places-overlay {
   position: absolute;
   max-width: 260px;
-  right: 252px;
+  right: -2rem;
   padding: 1rem;
   height: 100%;
   overflow: scroll;
   z-index: 1;
 }
-.overlay .place-container {
+.saved-places-overlay .place-container {
   padding: 1rem;
   margin-bottom: 1rem;
   position: relative;
@@ -123,26 +133,48 @@ button {
   background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
 }
-.overlay .place-container .title,
-.overlay .place-container .coordinates {
+.saved-places-overlay .place-container .title,
+.saved-places-overlay .place-container .coordinates {
   margin: 0;
 }
-.overlay .place-container .title,
-.overlay .place-container .opening-hours {
+.saved-places-overlay .place-container .title,
+.saved-places-overlay .place-container .opening-hours {
   color: #2d7274;
 }
-.overlay .place-container .coordinates {
+.saved-places-overlay .place-container .coordinates {
   color: #6a6a6a;
   font-size: 0.6875rem;
 }
-.overlay .place-container .description {
+.saved-places-overlay .place-container .description {
   color: #6a6a6a;
 }
 
 .active {
   display: block;
+  animation: places-in 0.25s ease-out forwards;
 }
 
+.hide {
+  display: block;
+  animation: places-out 0.25s ease-out forwards;
+}
+
+@keyframes places-in {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-276px);
+  }
+}
+@keyframes places-out {
+  0% {
+    transform: translateX(-276px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
 h4 {
   text-transform: uppercase;
   font-weight: 700;
