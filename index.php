@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css">
   <script src="js/map.js"></script>
   <script src="js/places.js"></script>
+  <script src="js/search.js"></script>
 </head>
 <body>
   <div class="wrapper">
@@ -19,7 +20,7 @@
       <div id="overlay" class="saved-places-overlay"></div>
       <aside id="sidebar" class="sidebar">
         <div class="search-container">
-          <input class="search" type="search" placeholder="Search">
+          <input id="search" class="search" type="search" placeholder="Search by title or tag...">
           <button id="search-btn">
             <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

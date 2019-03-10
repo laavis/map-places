@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $color_light;
+  font-family: $font_body;
+
+  h4 {
+    text-transform: uppercase;
+    font-weight: $font_bold;
+    letter-spacing: 2px;
+  }
+
+  input,
+  textarea {
+    border: none;
+    border-radius: 2px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    font-family: $font_body;
+  }
+}

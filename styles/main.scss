@@ -1,29 +1,8 @@
-@import 'variables';
+@import 'modules/variables';
+@import 'modules/mixins';
+@import 'components/general.scss';
 @import 'components/card.scss';
 @import 'components/form.scss';
 @import 'components/sidebar.scss';
 @import 'components/buttons.scss';
 @import 'components/saved-places-overlay.scss';
-
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
-
-h4 {
-  text-transform: uppercase;
-  font-weight: $font_bold;
-  letter-spacing: 2px;
-}
-
-input,
-textarea {
-  border: none;
-  border-radius: 2px;
-  padding: 0.5rem;
-  box-sizing: border-box;
-  font-family: $font_body;
-}
-
-body {
-  background-color: $color_light;
-  font-family: $font_body;
-}

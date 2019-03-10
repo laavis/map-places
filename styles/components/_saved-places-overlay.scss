@@ -1,7 +1,7 @@
 .saved-places-overlay {
   // display: none;
   position: absolute;
-  max-width: 260px;
+  width: 260px;
   right: -2rem;
   padding: 1rem;
   height: 100%;
@@ -29,10 +29,33 @@
     .coordinates {
       color: $color_text-grey;
       font-size: 0.6875rem;
+
+      p {
+        margin: 0;
+      }
     }
 
     .description {
       color: $color_text-grey;
+    }
+
+    .delete-place-btn {
+      path {
+        fill: #e8635a;
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        transform-origin: 8px 8px;
+      }
+
+      .lid {
+        animation: lid-down 0.15s ease-in forwards;
+      }
+
+      &:hover {
+        .lid {
+          animation: lid-up 0.15s ease-in forwards;
+        }
+      }
     }
   }
 }
@@ -62,5 +85,22 @@
   }
   100% {
     transform: translateX(0px);
+  }
+}
+
+@keyframes lid-up {
+  from {
+    transform: rotate();
+  }
+  to {
+    transform: rotate(-15deg);
+  }
+}
+@keyframes lid-down {
+  from {
+    transform: rotate(-15deg);
+  }
+  to {
+    transform: rotate(0);
   }
 }

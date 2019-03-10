@@ -1,5 +1,25 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6f6;
+  font-family: "Open Sans", sans-serif;
+}
+body h4 {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+body input,
+body textarea {
+  border: none;
+  border-radius: 2px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
 .wrapper {
   height: 100vh;
   display: flex;
@@ -15,6 +35,14 @@
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 576px) {
+  .wrapper .card {
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    border-radius: 0;
+  }
 }
 .wrapper .card .map {
   flex: 1;
@@ -78,6 +106,15 @@
   border-radius: 2px 0px 0px 2px;
   flex: 1;
 }
+@media (max-width: 576px) {
+  .sidebar {
+    background-color: grey;
+    max-width: 100%;
+  }
+}
+.sidebar.edit {
+  background-color: #f47755;
+}
 
 button {
   padding: 0.5rem;
@@ -90,6 +127,7 @@ button {
   letter-spacing: 2px;
   background-color: #ffc09d;
   text-shadow: 1px 1px 4px rgba(47, 32, 23, 0.2);
+  box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
 }
 
 #search-btn {
@@ -114,11 +152,27 @@ button {
 
 .edit-btn {
   width: 100%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.delete-place-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s linear;
+  cursor: pointer;
 }
 
 .saved-places-overlay {
   position: absolute;
-  max-width: 260px;
+  width: 260px;
   right: -2rem;
   padding: 1rem;
   height: 100%;
@@ -145,8 +199,23 @@ button {
   color: #6a6a6a;
   font-size: 0.6875rem;
 }
+.saved-places-overlay .place-container .coordinates p {
+  margin: 0;
+}
 .saved-places-overlay .place-container .description {
   color: #6a6a6a;
+}
+.saved-places-overlay .place-container .delete-place-btn path {
+  fill: #e8635a;
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  transform-origin: 8px 8px;
+}
+.saved-places-overlay .place-container .delete-place-btn .lid {
+  animation: lid-down 0.15s ease-in forwards;
+}
+.saved-places-overlay .place-container .delete-place-btn:hover .lid {
+  animation: lid-up 0.15s ease-in forwards;
 }
 
 .active {
@@ -175,24 +244,21 @@ button {
     transform: translateX(0px);
   }
 }
-h4 {
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 2px;
+@keyframes lid-up {
+  from {
+    transform: rotate();
+  }
+  to {
+    transform: rotate(-15deg);
+  }
 }
-
-input,
-textarea {
-  border: none;
-  border-radius: 2px;
-  padding: 0.5rem;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
-}
-
-body {
-  background-color: #f6f6f6;
-  font-family: "Open Sans", sans-serif;
+@keyframes lid-down {
+  from {
+    transform: rotate(-15deg);
+  }
+  to {
+    transform: rotate(0);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

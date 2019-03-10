@@ -5,9 +5,15 @@ $color_light: #f6f6f6;
 $color_card: #fff;
 $color_primary: #2d7274;
 $color_contrast: #ffc09d;
+$color_sidebar-edit: #f47755;
 $color_text-grey: #6a6a6a;
 
 // FONTS
 $font_body: 'Open Sans', sans-serif;
 $font_bold: 700;
 $font_small: 0.75rem;
+
+// MEDIA QUERIES
+$screen-mobile-max: 576px;
+$screen-sm-desktop-max: 1000px;
+$screen-sm-desktop-min: 700px;

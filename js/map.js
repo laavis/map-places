@@ -1,6 +1,9 @@
+let markers = [];
+let map;
+
 function initMap() {
   const helsinki = { lat: 60.1699, lng: 24.9384 };
-  const map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: helsinki,
     styles: [
@@ -238,24 +241,20 @@ function initMap() {
     ]
   });
 
+  window.map = map;
+
   // initialize marker
-  const marker = new google.maps.Marker({});
+  // const marker = new google.maps.Marker({});
 
   map.addListener('click', e => {
     getCoordinates(e, map);
     setCoordinates(e);
   });
 
-  marker.addListener('click', () => {
-    map.setZoom(8);
-    map.setCenter(marker.getPosition());
-  });
-
-  getPlacesCoordinates(map, marker);
+  getPlacesFromDb();
 }
 
 const setCoordinates = e => {
-  let coordinates = [];
   let latitude = e.latLng.lat();
   let longitude = e.latLng.lng();
   const latitudeInput = document.getElementById('latitude');
@@ -268,25 +267,18 @@ const setCoordinates = e => {
 const getCoordinates = (e, map) => {
   let latitude = e.latLng.lat();
   let longitude = e.latLng.lng();
-  console.log(latitude + ' ' + longitude);
-
-  radius = new google.maps.Circle({
-    map: map,
-    radius: 100,
-    fillColor: '#777',
-    fillOpacity: 0.1,
-    strokeColor: '#AA0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    draggable: true, // Dragable
-    editable: true // Resizable
-  });
+  console.log(latitude + ', ' + longitude);
 
   // Center of map
   map.panTo(new google.maps.LatLng(latitude, longitude));
 };
 
-const getPlacesCoordinates = (map, marker) => {
+const renderNewMarker = place => {
+  createMarker(place);
+  setMapOnAll(map);
+};
+
+const getPlacesFromDb = () => {
   const settings = {
     method: 'get'
   };
@@ -294,24 +286,51 @@ const getPlacesCoordinates = (map, marker) => {
   fetch('api/places.php', settings)
     .then(res => res.json())
     .then(places => {
-      for (place in places) {
-        const latLng = {
-          lat: parseFloat(places[place].latitude),
-          lng: parseFloat(places[place].longitude)
-        };
-        createMarker(latLng, map, places[place].title);
+      for (let place of places) {
+        createMarker(place);
       }
     })
     .catch(console.error());
-
-  marker.setMap(map);
 };
 
-const createMarker = (latLng, map, title) => {
+const clearMarkers = () => {
+  setMapOnAll(null);
+};
+
+const setMapOnAll = map => {
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+};
+
+const showMarkers = map => {
+  setMapOnAll(map);
+};
+
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+  getPlacesFromDb();
+}
+
+const createMarker = place => {
+  const latLng = {
+    lat: parseFloat(place.latitude),
+    lng: parseFloat(place.longitude)
+  };
   const marker = new google.maps.Marker({
     position: latLng,
     map: map,
     animation: google.maps.Animation.DROP,
-    title: title
+    title: place.title,
+    optimized: false,
+    icon: 'img/marker.svg'
+  });
+  markers.push(marker);
+  marker.addListener('click', () => {
+    const overlay = document.getElementById('overlay');
+    overlay.classList.add('active');
+    active = true;
+    editPlaceUi(place);
   });
 };

@@ -14,4 +14,13 @@
       flex: 1;
     }
   }
+
+  @include mobile {
+    background-color: grey;
+    max-width: 100%;
+  }
+
+  &.edit {
+    background-color: $color_sidebar-edit;
+  }
 }
