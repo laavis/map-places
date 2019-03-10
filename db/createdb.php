@@ -31,13 +31,34 @@
     FOREIGN KEY(tag_id) REFERENCES tag(id)
   )');
 
-  $db->exec('INSERT INTO place (title, description, latitude, longitude, opens_at, closes_at) VALUES(
+  $db->exec('INSERT INTO place (title, description, latitude, longitude, opens_at, closes_at)
+  VALUES (
     "Stockmann",
     "Stockmann Helsinki Centre is a culturally significant business building and department store located in the centre of Helsinki, Finland.",
     60.1683,
     24.9422,
     time("09:00"),
     time("21:00")
+  )');
+
+  $db->exec('INSERT INTO place (title, description, latitude, longitude, opens_at, closes_at)
+  VALUES (
+    "Kiasma",
+    "Contemporary art museum & cultural center with thematic annual exhibitions, a theater and event",
+    60.1720,
+    24.9367,
+    time("10:00"),
+    time("20:30")
+  )');
+
+  $db->exec('INSERT INTO place (title, description, latitude, longitude, opens_at, closes_at)
+  VALUES (
+    "Design Museum Helsinki",
+    "Long-standing design museum with an extensive permanent collection, plus a cafe & gift shop",
+    60.1631,
+    24.9467,
+    time("11:00"),
+    time("18:00")
   )');
 
   $db->exec('INSERT INTO tag (label) VALUES (
