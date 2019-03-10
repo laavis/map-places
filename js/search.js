@@ -26,12 +26,8 @@ const searchByTitle = value => {
   fetch('api/search.php', settings)
     .then(res => res.json())
     .then(results => {
-      for (result in results) {
-        const latLng = {
-          lat: parseFloat(results[result].latitude),
-          lng: parseFloat(results[result].longitude)
-        };
-        createMarker(latLng, results[result].title);
+      for (let result of results) {
+        createMarker(result);
       }
     })
     .catch(console.error());
