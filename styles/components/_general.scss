@@ -22,3 +22,42 @@ body {
     font-family: $font_body;
   }
 }
+
+#logo-container {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    margin-right: 0.5rem;
+  }
+
+  #logo {
+    transform-origin: bottom;
+    transform: translateY(-60px);
+    opacity: 0;
+    &.animate {
+      opacity: 1;
+      animation: logo-drop 0.7s cubic-bezier(0.57, 0.21, 0.69, 1.25) 0.5s
+        forwards;
+    }
+  }
+}
+#tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.25rem;
+  .tag-element {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    margin: 0.25rem;
+    border-radius: 2px;
+    border: 1px solid white;
+
+    p {
+      margin: 0;
+      margin-top: -2px;
+      margin-right: 0.5rem;
+    }
+  }
+}

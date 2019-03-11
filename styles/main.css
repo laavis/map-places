@@ -1,5 +1,57 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+@keyframes places-in {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-276px);
+  }
+}
+@keyframes places-out {
+  0% {
+    transform: translateX(-276px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+@keyframes lid-up {
+  from {
+    transform: rotate();
+  }
+  to {
+    transform: rotate(-15deg);
+  }
+}
+@keyframes lid-down {
+  from {
+    transform: rotate(-15deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}
+@keyframes logo-drop {
+  0% {
+    transform: translateY(-60px);
+  }
+  30% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: rotateZ(15deg);
+  }
+  70% {
+    transform: rotateZ(-10deg);
+  }
+  85% {
+    transform: rotateZ(5deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
 body {
   margin: 0;
   padding: 0;
@@ -20,16 +72,55 @@ body textarea {
   font-family: "Open Sans", sans-serif;
 }
 
+#logo-container {
+  display: flex;
+  align-items: center;
+}
+#logo-container h1 {
+  margin-right: 0.5rem;
+}
+#logo-container #logo {
+  transform-origin: bottom;
+  transform: translateY(-60px);
+  opacity: 0;
+}
+#logo-container #logo.animate {
+  opacity: 1;
+  animation: logo-drop 0.7s cubic-bezier(0.57, 0.21, 0.69, 1.25) 0.5s forwards;
+}
+
+#tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.25rem;
+}
+#tags-container .tag-element {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  border-radius: 2px;
+  border: 1px solid white;
+}
+#tags-container .tag-element p {
+  margin: 0;
+  margin-top: -2px;
+  margin-right: 0.5rem;
+}
+
 .wrapper {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 15vw;
 }
 .wrapper .card {
+  width: 100%;
   display: flex;
-  width: 1200px;
-  height: 750px;
+  flex: 1;
+  margin-bottom: 4rem;
   position: relative;
   background-color: #fff;
   border-radius: 6px;
@@ -96,6 +187,7 @@ body textarea {
   max-width: 220px;
   background-color: #2d7274;
   z-index: 10;
+  overflow: scroll;
 }
 .sidebar .search-container {
   height: 2.25rem;
@@ -170,6 +262,13 @@ button {
   cursor: pointer;
 }
 
+.remove-tag-btn {
+  width: 12px;
+  height: 12px;
+  background-image: url("../img/delete-tag-icon.svg");
+  cursor: pointer;
+}
+
 .saved-places-overlay {
   position: absolute;
   width: 260px;
@@ -205,6 +304,19 @@ button {
 .saved-places-overlay .place-container .description {
   color: #6a6a6a;
 }
+.saved-places-overlay .place-container .tags-container {
+  margin-left: -0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.saved-places-overlay .place-container .tags-container .tag {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  font-size: 0.875rem;
+  color: #2d7274;
+  border-radius: 2px;
+  border: 1px solid #2d7274;
+}
 .saved-places-overlay .place-container .delete-place-btn path {
   fill: #e8635a;
   fill-rule: evenodd;
@@ -226,39 +338,6 @@ button {
 .hide {
   display: block;
   animation: places-out 0.25s ease-out forwards;
-}
-
-@keyframes places-in {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-276px);
-  }
-}
-@keyframes places-out {
-  0% {
-    transform: translateX(-276px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
-@keyframes lid-up {
-  from {
-    transform: rotate();
-  }
-  to {
-    transform: rotate(-15deg);
-  }
-}
-@keyframes lid-down {
-  from {
-    transform: rotate(-15deg);
-  }
-  to {
-    transform: rotate(0);
-  }
 }
 
 /*# sourceMappingURL=main.css.map */

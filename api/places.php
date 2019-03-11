@@ -26,18 +26,39 @@
 
   function read($db) {
     $query = "SELECT
-      id,
-      title,
-      description,
-      latitude,
-      longitude,
-      opens_at,
-      closes_at
-    FROM place";
+      p.id,
+      p.title,
+      p.description,
+      p.latitude,
+      p.longitude,
+      p.opens_at,
+      p.closes_at,
+      t.label
+    FROM place p
+    LEFT JOIN place_tag pt
+    ON p.id = pt.place_id
+    LEFT JOIN tag t
+    ON pt.tag_id = t.id";
 
-    // Return an array indexed by column name
-    $results = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($results);
+    $places = [];
+    $results = $db->query($query);
+    while($place = $results->fetch(PDO::FETCH_ASSOC)) {
+      if (!array_key_exists($place['id'], $places)) {
+        $place['tags'] = [];
+        $places[$place['id']] = $place;
+        unset($places[$place['id']]['label']);
+      }
+
+      if ($place['label'] != null) {
+        array_push($places[$place['id']]['tags'], $place['label']);
+      }
+    }
+
+    $list = [];
+    foreach($places as $place) {
+      array_push($list, $place);
+    }
+    echo json_encode($list);
   }
 
   function create($db, $data) {
@@ -99,7 +120,7 @@
     $stmt->bindParam(':longitude', $data->longitude, PDO::PARAM_STR);
     $stmt->bindParam(':opens_at', $data->opens_at, PDO::PARAM_STR);
     $stmt->bindParam(':closes_at', $data->closes_at, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $data->id, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
 
     
     $success = $stmt->execute();
@@ -110,7 +131,7 @@
     $query = 'DELETE FROM place WHERE id = :id';
     $stmt = $db->prepare($query);
 
-    $stmt->bindParam(':id', $data->id, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
 
     $success = $stmt->execute();
     echo 'post deleted';

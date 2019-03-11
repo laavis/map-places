@@ -1,0 +1,56 @@
+@keyframes places-in {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-276px);
+  }
+}
+
+@keyframes places-out {
+  0% {
+    transform: translateX(-276px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes lid-up {
+  from {
+    transform: rotate();
+  }
+  to {
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes lid-down {
+  from {
+    transform: rotate(-15deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}
+
+@keyframes logo-drop {
+  0% {
+    transform: translateY(-60px);
+  }
+  30% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: rotateZ(15deg);
+  }
+  70% {
+    transform: rotateZ(-10deg);
+  }
+  85% {
+    transform: rotateZ(5deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}

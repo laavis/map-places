@@ -38,6 +38,19 @@
     .description {
       color: $color_text-grey;
     }
+    .tags-container {
+      margin-left: -0.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      .tag {
+        margin: 0.25rem;
+        padding: 0.25rem;
+        font-size: 0.875rem;
+        color: $color_primary;
+        border-radius: 2px;
+        border: 1px solid $color_primary;
+      }
+    }
 
     .delete-place-btn {
       path {
@@ -68,39 +81,4 @@
 .hide {
   display: block;
   animation: places-out 0.25s ease-out forwards;
-}
-
-@keyframes places-in {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-276px);
-  }
-}
-
-@keyframes places-out {
-  0% {
-    transform: translateX(-276px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
-
-@keyframes lid-up {
-  from {
-    transform: rotate();
-  }
-  to {
-    transform: rotate(-15deg);
-  }
-}
-@keyframes lid-down {
-  from {
-    transform: rotate(-15deg);
-  }
-  to {
-    transform: rotate(0);
-  }
 }

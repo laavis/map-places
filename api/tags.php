@@ -14,6 +14,10 @@
     echo json_encode(array("error"=>$error));
   }
 
+  function show_success($data = []) {
+    echo json_encode(array_merge(array("success"=>true), $data));
+  }
+
   function create($db, $data) {
     $query = "INSERT INTO tag (label) VALUES (:label)";
 
@@ -21,7 +25,7 @@
     $stmt->bindParam(':label', $data->label, PDO::PARAM_STR);
 
     $succes = $stmt->execute();
-    echo 'succ';
+    show_success();
   }
 
   function read($db) {
@@ -39,7 +43,7 @@
     $stmt->bindParam(':id', $data->id, PDO::PARAM_INT);
 
     $success = $stmt->execute();
-    echo 'success';
+    show_success();
   }
 
   function remove($db, $data) {
@@ -50,7 +54,7 @@
 
   
     $succes = $stmt->execute();
-    echo 'tag removed';
+    show_success();
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') create($db, $data);
