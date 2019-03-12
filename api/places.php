@@ -93,7 +93,7 @@
     $stmt->bindParam(':closes_at', $data->closes_at, PDO::PARAM_STR);
 
     $success = $stmt->execute();
-    show_success();
+    show_success(array('id'=>$db->lastInsertId()));
   }
 
 
@@ -120,7 +120,7 @@
     $stmt->bindParam(':longitude', $data->longitude, PDO::PARAM_STR);
     $stmt->bindParam(':opens_at', $data->opens_at, PDO::PARAM_STR);
     $stmt->bindParam(':closes_at', $data->closes_at, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
+    $stmt->bindParam(':id', $data->id, PDO::PARAM_INT);
 
     
     $success = $stmt->execute();
@@ -131,7 +131,7 @@
     $query = 'DELETE FROM place WHERE id = :id';
     $stmt = $db->prepare($query);
 
-    $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
+    $stmt->bindParam(':id', $data->id, PDO::PARAM_INT);
 
     $success = $stmt->execute();
     echo 'post deleted';

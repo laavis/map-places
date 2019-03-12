@@ -6,16 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchValue = searchInput.value;
     e.preventDefault();
     clearMarkers();
-    searchByTitle(searchValue);
+    searchByTitle(searchValue, searchValue);
   });
 });
 
-const searchByTitle = value => {
-  data = {
-    search_str: value
-  };
+const searchByTitle = (tag, title) => {
   const settings = {
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      search_tag: tag,
+      search_title: title
+    }),
     method: 'POST',
     headers: {
       Accept: 'application/json',

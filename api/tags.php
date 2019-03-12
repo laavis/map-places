@@ -18,47 +18,85 @@
     echo json_encode(array_merge(array("success"=>true), $data));
   }
 
-  function create($db, $data) {
+  function check_duplicates($db, $data) {
+    $query = 'SELECT place_id FROM place_tag WHERE place_id = :place_id AND tag_id = :tag_id';
+    $stmt = $db->prepare($query);
+
+    $stmt->bindParam(':place_id', $data->place_id, PDO::PARAM_INT);
+    $stmt->bindParam(':tag_id', $data->tag_id, PDO::PARAM_INT);
+
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return !empty($result);
+  }
+
+  function tag_exists($db, $label) {
+    $query = 'SELECT id FROM tag WHERE label = :label';
+
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':label', $label, PDO::PARAM_STR);
+
+    $stmt->execute();
+    $result = $stmt->fetch();
+
+    if (empty($result) || !$result) return null;
+    return $result['id'];
+  }
+
+  function create_tag($db, $label) {
     $query = "INSERT INTO tag (label) VALUES (:label)";
 
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':label', $data->label, PDO::PARAM_STR);
+    $stmt->bindParam(':label', $label, PDO::PARAM_STR);
 
-    $succes = $stmt->execute();
-    show_success();
+    $success = $stmt->execute();
+    $tag_id = tag_exists($db, $label);
+    return $tag_id;
   }
 
-  function read($db) {
-    $query = 'SELECT id, label FROM tag';
+  function create($db, $data) {
+    $tag_id = tag_exists($db, $data->label);
 
-    $results = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($results);
-  }
+    if ($tag_id == null) {
+      $tag_id = create_tag($db, $data->label);
+    }
 
-  function update($db, $data) {
-    $query = "UPDATE tag SET label = :label WHERE id = :id";
+    if (check_duplicates($db, $data)) return show_error('Tag already exists');
+    
+    $query = 'INSERT INTO place_tag(place_id, tag_id) VALUES (:place_id, :tag_id)';
+
     $stmt = $db->prepare($query);
 
-    $stmt->bindParam(':label', $data->label, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $data->id, PDO::PARAM_INT);
+    $stmt->bindParam(':place_id', $data->place_id, PDO::PARAM_INT);
+    $stmt->bindParam(':tag_id', $tag_id, PDO::PARAM_INT);
 
     $success = $stmt->execute();
     show_success();
   }
 
+
+  function read($db) {
+    $query = 'SELECT tag_id, place_id FROM place_tag';
+
+    $results = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($results);
+  }
+
   function remove($db, $data) {
-    $query = 'DELETE FROM tag WHERE id = :id';
+    $tag_id = tag_exists($db, $data->label);
+    if ($tag_id == null) return show_success();
+
+    $query = 'DELETE FROM place_tag WHERE tag_id = :tag_id AND place_id = :place_id';
     $stmt = $db->prepare($query);
 
-    $stmt->bindParam(':id', $data->id, PDO::PARAM_INT);
+    $stmt->bindParam(':tag_id', $tag_id, PDO::PARAM_INT);
+    $stmt->bindParam(':place_id', $data->place_id, PDO::PARAM_INT);
 
-  
     $succes = $stmt->execute();
     show_success();
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') create($db, $data);
-  if ($_SERVER['REQUEST_METHOD'] === 'GET') read($db);
-  if ($_SERVER['REQUEST_METHOD'] === 'PUT') update($db, $data);
+  if ($_SERVER['REQUEST_METHOD'] === 'GET') read($db, $data);
   if ($_SERVER['REQUEST_METHOD'] === 'DELETE') remove($db, $data);
 ?>

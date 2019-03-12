@@ -1,7 +1,6 @@
 let data = {};
 let active = false;
 let formState = 'add';
-const tags = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form');
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   logo.classList.add('animate');
 
   getPlaces();
-  addTags();
+  addTagsToUi();
 
   myPlacesBtn.addEventListener('click', () => {
     overlay.classList.toggle('active');
@@ -34,11 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     if (formState === 'add') {
       console.log(data);
-      //addPlace();
-      getTagsFromForm();
-      // Add marker to created place
+      addPlace();
+      resetTagsUi();
       renderNewMarker(data);
     } else if (formState === 'update') {
+      resetTagsUi();
       editPlace();
       clearMarkers();
       deleteMarkers();
@@ -65,50 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-const addTags = () => {
-  const tagInput = document.getElementById('tags');
-
-  tagInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const value = tagInput.value;
-
-      if (tags.includes(value)) {
-        tagInput.value = '';
-        return;
-      }
-
-      const valueLowerCase = value.toLowerCase();
-      createTagUi(value);
-      tags.push(valueLowerCase);
-      tagInput.value = '';
+const createTags = (id, list, callback) => {
+  const tag = list.shift();
+  console.log(tag);
+  addTag(id, tag).then(() => {
+    if (list.length > 0) {
+      createTags(id, list, callback);
+    } else {
+      callback();
     }
   });
-};
-
-const createTagUi = value => {
-  const tagsContainer = document.getElementById('tags-container');
-  const tagElement = document.createElement('div');
-  tagElement.classList.add('tag-element');
-
-  const removeTagBtn = document.createElement('div');
-  removeTagBtn.classList.add('remove-tag-btn');
-
-  removeTagBtn.addEventListener('click', e => {
-    e.preventDefault();
-    tagElement.remove();
-    const index = tags.indexOf(value);
-    tags.splice(index, 1);
-  });
-
-  const tagValue = document.createElement('p');
-  tagValue.innerText = value.toLowerCase();
-
-  tagElement.appendChild(tagValue);
-  tagElement.appendChild(removeTagBtn);
-  tagsContainer.appendChild(tagElement);
 };
 
 const addPlace = () => {
@@ -122,8 +87,12 @@ const addPlace = () => {
   };
 
   fetch('api/places.php', settings)
+    .then(res => res.json())
     .then(res => {
-      getPlaces();
+      createTags(res.id, tags, () => {
+        tags = [];
+        getPlaces();
+      });
     })
     .catch(console.error());
 };
@@ -146,12 +115,10 @@ const editPlace = () => {
 };
 
 const deletePlace = id => {
-  data = {
-    id: id
-  };
-
   const settings = {
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      id: id
+    }),
     method: 'DELETE'
   };
 
@@ -165,13 +132,31 @@ const deletePlace = id => {
   setMapOnAll(window.map);
 };
 
+const getPlaces = () => {
+  const settings = {
+    method: 'get'
+  };
+
+  overlay.innerText = '';
+
+  fetch('api/places.php', settings)
+    .then(res => res.json())
+    .then(places => {
+      createPlaceCard(places);
+    })
+    .catch(console.error());
+};
+
 const editPlaceUi = place => {
   formState = 'update';
   const formFunctionTitle = document.getElementById('form-function');
+
   const submitBtn = document.getElementById('submit-btn');
   const saveBtn = document.getElementById('save-btn');
   const cancelBtn = document.getElementById('cancel-btn');
   const sidebar = document.getElementById('sidebar');
+
+  resetTagsUi();
 
   for (let tag of place.tags) {
     createTagUi(tag);
@@ -194,6 +179,7 @@ const editPlaceUi = place => {
 
   cancelBtn.addEventListener('click', e => {
     e.preventDefault();
+    resetTagsUi();
     formState = 'add';
     sidebar.classList.remove('edit');
     saveBtn.style.display = 'none';
@@ -311,19 +297,4 @@ const createPlaceCard = places => {
     placeContainer.appendChild(editBtn);
     overlay.appendChild(placeContainer);
   }
-};
-
-const getPlaces = () => {
-  const settings = {
-    method: 'get'
-  };
-
-  overlay.innerText = '';
-
-  fetch('api/places.php', settings)
-    .then(res => res.json())
-    .then(places => {
-      createPlaceCard(places);
-    })
-    .catch(console.error());
 };

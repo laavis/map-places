@@ -18,27 +18,38 @@
     echo json_encode(array_merge(array("success"=>true), $data));
   }
 
-  function search_by_title($db, $data) {
-    $query = "SELECT
-      id,
-      title,
-      description,
-      latitude,
-      longitude,
-      opens_at,
-      closes_at
-    FROM place
-    WHERE title LIKE :search_str";
+  function search_by_tile_or_tag($db, $data) {
+    $query = 'SELECT
+      p.id,
+      p.title,
+      p.description,
+      p.latitude,
+      p.longitude,
+      p.opens_at,
+      p.closes_at
+      FROM place p
+      JOIN place_tag pt ON p.id = pt.place_id
+      JOIN tag t ON t.id = pt.tag_id
+      WHERE t.label LIKE :search_tag OR p.title LIKE :search_title';
 
-    $title = "%$data->search_str%";
+      $tag = "%";
+      if (!empty($data->search_tag)) {
+        $tag = "%$data->search_tag%";
+      }
 
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':search_str', $title, PDO::PARAM_STR);
-    $success = $stmt->execute();
+      $title = "%";
+      if (!empty($data->search_title)) {
+        $title = "%$data->search_title%";
+      }
 
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($results);
+      $stmt = $db->prepare($query);
+      $stmt->bindParam(':search_tag', $tag, PDO::PARAM_STR);
+      $stmt->bindParam(':search_title', $title, PDO::PARAM_STR);
+      $success = $stmt->execute();
+
+      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      echo json_encode($results);
   }
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') search_by_title($db, $data);
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') search_by_tile_or_tag($db, $data);
 ?>

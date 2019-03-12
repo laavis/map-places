@@ -243,9 +243,6 @@ function initMap() {
 
   window.map = map;
 
-  // initialize marker
-  // const marker = new google.maps.Marker({});
-
   map.addListener('click', e => {
     getCoordinates(e, map);
     setCoordinates(e);

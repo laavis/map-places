@@ -89,25 +89,6 @@ body textarea {
   animation: logo-drop 0.7s cubic-bezier(0.57, 0.21, 0.69, 1.25) 0.5s forwards;
 }
 
-#tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -0.25rem;
-}
-#tags-container .tag-element {
-  display: flex;
-  align-items: center;
-  padding: 0.25rem;
-  margin: 0.25rem;
-  border-radius: 2px;
-  border: 1px solid white;
-}
-#tags-container .tag-element p {
-  margin: 0;
-  margin-top: -2px;
-  margin-right: 0.5rem;
-}
-
 .wrapper {
   height: 100vh;
   display: flex;
@@ -125,7 +106,7 @@ body textarea {
   background-color: #fff;
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1), 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 @media (max-width: 576px) {
   .wrapper .card {
@@ -142,10 +123,10 @@ body textarea {
 .form-container form {
   display: flex;
   flex-direction: column;
-  color: #f6f6f6;
+  color: #ffffff;
 }
 .form-container form h4 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   margin-top: 1.25rem;
 }
 .form-container form p {
@@ -160,6 +141,10 @@ body textarea {
 .form-container form input {
   margin: 4px 0px 1rem 2px;
   font-family: "Open Sans", sans-serif;
+  color: #152f30;
+}
+.form-container form #tags {
+  margin-bottom: 0;
 }
 .form-container form textarea {
   margin: 4px 0px 1rem 4px;
@@ -187,7 +172,8 @@ body textarea {
   max-width: 220px;
   background-color: #2d7274;
   z-index: 10;
-  overflow: scroll;
+  overflow-y: scroll;
+  transition: all 0.15s linear;
 }
 .sidebar .search-container {
   height: 2.25rem;
@@ -198,6 +184,24 @@ body textarea {
   border-radius: 2px 0px 0px 2px;
   flex: 1;
 }
+.sidebar #tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.25rem 0 1rem -0.25rem;
+}
+.sidebar #tags-container .tag-element {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  border-radius: 2px;
+  border: 1px solid white;
+}
+.sidebar #tags-container .tag-element p {
+  margin: 0;
+  margin-top: -2px;
+  margin-right: 0.5rem;
+}
 @media (max-width: 576px) {
   .sidebar {
     background-color: grey;
@@ -205,12 +209,11 @@ body textarea {
   }
 }
 .sidebar.edit {
-  background-color: #f47755;
+  background-color: #f47455;
 }
-
 button {
   padding: 0.5rem;
-  color: #f6f6f6;
+  color: #ffffff;
   cursor: pointer;
   border: none;
   border-radius: 2px;
@@ -219,12 +222,22 @@ button {
   letter-spacing: 2px;
   background-color: #ffc09d;
   text-shadow: 1px 1px 4px rgba(47, 32, 23, 0.2);
-  box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
+  box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.1);
+  transition: all 0.15s ease;
+}
+button:hover {
+  box-shadow: 0 6px 12px rgba(19, 46, 47, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 #search-btn {
+  box-shadow: none;
   border-radius: 0px 2px 2px 0px;
   padding: 1px 6px;
+}
+#search-btn:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 #submit-btn {
@@ -244,7 +257,10 @@ button {
 
 .edit-btn {
   width: 100%;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.edit-btn:hover {
+  box-shadow: 0 6px 12px rgba(255, 139, 86, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .delete-place-btn {

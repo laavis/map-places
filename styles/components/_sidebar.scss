@@ -3,7 +3,8 @@
   max-width: 220px;
   background-color: $color_primary;
   z-index: 10;
-  overflow: scroll;
+  overflow-y: scroll;
+  transition: all 0.15s linear;
 
   .search-container {
     height: 2.25rem;
@@ -16,6 +17,26 @@
     }
   }
 
+  #tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.25rem 0 1rem -0.25rem;
+    .tag-element {
+      display: flex;
+      align-items: center;
+      padding: 0.25rem;
+      margin: 0.25rem;
+      border-radius: 2px;
+      border: 1px solid white;
+
+      p {
+        margin: 0;
+        margin-top: -2px;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
   @include mobile {
     background-color: grey;
     max-width: 100%;
@@ -23,5 +44,8 @@
 
   &.edit {
     background-color: $color_sidebar-edit;
+    #form-function {
+      // color: pink;
+    }
   }
 }

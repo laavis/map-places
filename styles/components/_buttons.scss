@@ -1,6 +1,6 @@
 button {
   padding: 0.5rem;
-  color: $color_light;
+  color: $color_white;
   cursor: pointer;
   border: none;
   border-radius: 2px;
@@ -9,12 +9,24 @@ button {
   letter-spacing: 2px;
   background-color: $color_contrast;
   text-shadow: 1px 1px 4px rgba(47, 32, 23, 0.2);
-  box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
+  box-shadow: $shadow-btn_dark-bg;
+  transition: all 0.15s ease;
+
+  &:hover {
+    box-shadow: $shadow-btn_dark-bg-hover;
+    transform: translateY(-1px);
+  }
 }
 
 #search-btn {
+  box-shadow: none;
   border-radius: 0px 2px 2px 0px;
   padding: 1px 6px;
+
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 #submit-btn {
@@ -34,7 +46,11 @@ button {
 
 .edit-btn {
   width: 100%;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: $shadow-btn_light-bg;
+
+  &:hover {
+    box-shadow: $shadow-btn_light-bg-hover;
+  }
 }
 
 .delete-place-btn {
