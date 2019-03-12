@@ -1,6 +1,8 @@
 <?php
   if (file_exists('./env.php')) {
     require './env.php';
+  } else {
+    $GOOGLE_MAPS_KEY = getenv('GOOGLE_MAPS_KEY');
   }
 ?>
 
