@@ -14,10 +14,6 @@
   <title>My Places</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css">
-  <script src="js/map.js"></script>
-  <script src="js/tags.js"></script>
-  <script src="js/places.js"></script>
-  <script src="js/search.js"></script>
 </head>
 <body>
   <div class="wrapper">
@@ -82,6 +78,11 @@
       </aside>
     </div>
   </div>
+
+  <script src="js/places.js"></script>
+  <script src="js/map.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $GOOGLE_MAPS_KEY; ?>&callback=initMap" async defer></script>
+  <script src="js/tags.js"></script>
+  <script src="js/search.js"></script>
 </body>
-<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $GOOGLE_MAPS_KEY; ?>&callback=initMap"async defer></script>
 </html>

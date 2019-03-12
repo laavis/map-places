@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const logo = document.getElementById('logo');
   logo.classList.add('animate');
 
-  getPlaces();
   addTagsToUi();
 
   myPlacesBtn.addEventListener('click', () => {
@@ -35,10 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formState === 'add') {
       resetTagsUi();
       addPlace();
+      form.reset();
     } else if (formState === 'update') {
       resetTagsUi();
-      clearMarkers();
-      deleteMarkers();
       editPlace();
 
       const submitBtn = document.getElementById('submit-btn');
@@ -46,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const cancelBtn = document.getElementById('cancel-btn');
       const sidebar = document.getElementById('sidebar');
 
-      sidebar.classList.toggle('edit');
+      sidebar.classList.remove('edit');
       saveBtn.style.display = 'none';
       cancelBtn.style.display = 'none';
       submitBtn.style.display = 'block';
@@ -84,12 +82,13 @@ const addPlace = () => {
     }
   };
 
+  delete data.id;
+
   fetch('api/places.php', settings)
     .then(res => res.json())
     .then(res => {
       createTags(res.id, tags, () => {
         tags = [];
-        delete data.id;
         getPlaces();
       });
     })
@@ -106,9 +105,11 @@ const editPlace = () => {
     }
   };
 
+  delete data.id;
+  formState = 'add';
+
   fetch('api/places.php', settings)
     .then(res => {
-      delete data.id;
       getPlaces();
     })
     .catch(console.error());
@@ -122,20 +123,25 @@ const deletePlace = id => {
     method: 'DELETE'
   };
 
+  delete data.id;
+
+  const form = document.getElementById('form');
+  const sidebar = document.getElementById('sidebar');
+
+  sidebar.classList.remove('edit');
+  formState = 'add';
+  form.reset();
+
   fetch('api/places.php', settings)
     .then(res => {
-      delete data.id;
       getPlaces();
     })
     .catch(console.error());
-  clearMarkers();
-  deleteMarkers();
-  setMapOnAll(window.map);
 };
 
 const getPlaces = () => {
   const settings = {
-    method: 'get'
+    method: 'GET'
   };
 
   overlay.innerText = '';
@@ -143,6 +149,7 @@ const getPlaces = () => {
   fetch('api/places.php', settings)
     .then(res => res.json())
     .then(places => {
+      deleteMarkers();
       createPlaceCard(places);
     })
     .catch(console.error());
@@ -297,5 +304,7 @@ const createPlaceCard = places => {
 
     placeContainer.appendChild(editBtn);
     overlay.appendChild(placeContainer);
+
+    createMarker(place);
   }
 };

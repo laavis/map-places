@@ -248,7 +248,7 @@ function initMap() {
     setCoordinates(e);
   });
 
-  getPlacesFromDb();
+  getPlaces();
 }
 
 const setCoordinates = e => {
@@ -270,44 +270,20 @@ const getCoordinates = (e, map) => {
   map.panTo(new google.maps.LatLng(latitude, longitude));
 };
 
-const renderNewMarker = place => {
-  createMarker(place);
-  setMapOnAll(map);
-};
-
-const getPlacesFromDb = () => {
-  const settings = {
-    method: 'get'
-  };
-
-  fetch('api/places.php', settings)
-    .then(res => res.json())
-    .then(places => {
-      for (let place of places) {
-        createMarker(place);
-      }
-    })
-    .catch(console.error());
-};
-
-const clearMarkers = () => {
-  setMapOnAll(null);
-};
-
 const setMapOnAll = map => {
   for (let i = 0; i < markers.length; i++) {
     markers[i].setMap(map);
   }
 };
 
-const showMarkers = map => {
-  setMapOnAll(map);
+const clearMarkers = () => {
+  setMapOnAll(null);
 };
 
-function deleteMarkers() {
+const deleteMarkers = () => {
   clearMarkers();
   markers = [];
-}
+};
 
 const createMarker = place => {
   const latLng = {
@@ -316,7 +292,7 @@ const createMarker = place => {
   };
   const marker = new google.maps.Marker({
     position: latLng,
-    map: map,
+    map,
     animation: google.maps.Animation.DROP,
     title: place.title,
     optimized: false,
@@ -329,4 +305,5 @@ const createMarker = place => {
     active = true;
     editPlaceUi(place);
   });
+  marker.setMap(map);
 };
