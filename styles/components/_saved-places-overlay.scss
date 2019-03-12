@@ -100,4 +100,8 @@
 .hide {
   display: block;
   animation: places-out 0.25s ease-out forwards;
+
+  @include mobile {
+    animation: none;
+  }
 }

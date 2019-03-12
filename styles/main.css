@@ -398,5 +398,10 @@ button:active {
   display: block;
   animation: places-out 0.25s ease-out forwards;
 }
+@media (max-width: 576px) {
+  .hide {
+    animation: none;
+  }
+}
 
 /*# sourceMappingURL=main.css.map */
