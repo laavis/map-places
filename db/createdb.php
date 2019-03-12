@@ -2,9 +2,9 @@
   $db = new PDO('sqlite:places.db');
 
   // Drop tables if there are any
-  $db->exec('DROP TABLE IF EXISTS place');
-  $db->exec('DROP TABLE IF EXISTS tag');
   $db->exec('DROP TABLE IF EXISTS place_tag');
+  $db->exec('DROP TABLE IF EXISTS tag');
+  $db->exec('DROP TABLE IF EXISTS place');
 
   // Create tables
   $db->exec('CREATE TABLE place (
