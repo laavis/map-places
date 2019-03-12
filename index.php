@@ -1,5 +1,7 @@
 <?php
-  require './env.php';
+  if (file_exists('./env.php')) {
+    require './env.php';
+  }
 ?>
 
 <!DOCTYPE <!DOCTYPE html>
