@@ -54,6 +54,13 @@
     return $tag_id;
   }
 
+  function read($db) {
+    $query = 'SELECT tag_id, place_id FROM place_tag';
+
+    $results = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($results);
+  }
+
   function create($db, $data) {
     $tag_id = tag_exists($db, $data->label);
 
@@ -75,14 +82,6 @@
 
     $success = $stmt->execute();
     show_success();
-  }
-
-
-  function read($db) {
-    $query = 'SELECT tag_id, place_id FROM place_tag';
-
-    $results = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($results);
   }
 
   function remove($db, $data) {
