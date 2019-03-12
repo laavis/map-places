@@ -6,6 +6,12 @@
   overflow-y: scroll;
   transition: all 0.15s linear;
 
+  @include mobile {
+    max-width: 100%;
+    max-height: 300px;
+    padding: 2rem;
+  }
+
   .search-container {
     height: 2.25rem;
     display: flex;
@@ -37,15 +43,7 @@
     }
   }
 
-  @include mobile {
-    background-color: grey;
-    max-width: 100%;
-  }
-
   &.edit {
     background-color: $color_sidebar-edit;
-    #form-function {
-      // color: pink;
-    }
   }
 }

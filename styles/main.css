@@ -97,6 +97,11 @@ body textarea {
   align-items: center;
   padding: 0 15vw;
 }
+@media (max-width: 576px) {
+  .wrapper {
+    padding: 0;
+  }
+}
 .wrapper .card {
   width: 100%;
   display: flex;
@@ -112,8 +117,10 @@ body textarea {
   .wrapper .card {
     width: 100vw;
     height: 100vh;
+    margin-bottom: 0;
     flex-direction: column;
     border-radius: 0;
+    box-shadow: none;
   }
 }
 .wrapper .card .map {
@@ -175,6 +182,13 @@ body textarea {
   overflow-y: scroll;
   transition: all 0.15s linear;
 }
+@media (max-width: 576px) {
+  .sidebar {
+    max-width: 100%;
+    max-height: 300px;
+    padding: 2rem;
+  }
+}
 .sidebar .search-container {
   height: 2.25rem;
   display: flex;
@@ -202,15 +216,10 @@ body textarea {
   margin-top: -2px;
   margin-right: 0.5rem;
 }
-@media (max-width: 576px) {
-  .sidebar {
-    background-color: grey;
-    max-width: 100%;
-  }
-}
 .sidebar.edit {
   background-color: #f47455;
 }
+
 button {
   padding: 0.5rem;
   color: #ffffff;
@@ -229,6 +238,10 @@ button:hover {
   box-shadow: 0 6px 12px rgba(19, 46, 47, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
 }
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(19, 46, 47, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
+}
 
 #search-btn {
   box-shadow: none;
@@ -236,6 +249,10 @@ button:hover {
   padding: 1px 6px;
 }
 #search-btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+#search-btn:active {
   transform: none;
   box-shadow: none;
 }
@@ -261,6 +278,9 @@ button:hover {
 }
 .edit-btn:hover {
   box-shadow: 0 6px 12px rgba(255, 139, 86, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+.edit-btn:active {
+  box-shadow: 0 4px 10px rgba(255, 139, 86, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
 .delete-place-btn {
@@ -294,6 +314,17 @@ button:hover {
   overflow: scroll;
   z-index: 1;
 }
+@media (max-width: 576px) {
+  .saved-places-overlay {
+    display: none;
+    padding: 0;
+    height: 50%;
+    width: 100%;
+    left: 0;
+    animation: none;
+    overflow: scroll;
+  }
+}
 .saved-places-overlay .place-container {
   padding: 1rem;
   margin-bottom: 1rem;
@@ -301,6 +332,11 @@ button:hover {
   border-radius: 4px;
   background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
+}
+@media (max-width: 576px) {
+  .saved-places-overlay .place-container {
+    margin: 1rem;
+  }
 }
 .saved-places-overlay .place-container .title,
 .saved-places-overlay .place-container .coordinates {
@@ -349,6 +385,13 @@ button:hover {
 .active {
   display: block;
   animation: places-in 0.25s ease-out forwards;
+}
+@media (max-width: 576px) {
+  .active {
+    animation: none;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .hide {

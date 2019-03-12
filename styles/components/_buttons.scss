@@ -16,6 +16,11 @@ button {
     box-shadow: $shadow-btn_dark-bg-hover;
     transform: translateY(-1px);
   }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: $shadow-btn_dark-bg-active;
+  }
 }
 
 #search-btn {
@@ -24,6 +29,11 @@ button {
   padding: 1px 6px;
 
   &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  &:active {
     transform: none;
     box-shadow: none;
   }
@@ -50,6 +60,10 @@ button {
 
   &:hover {
     box-shadow: $shadow-btn_light-bg-hover;
+  }
+
+  &:active {
+    box-shadow: $shadow-btn_ligth-bg-active;
   }
 }
 

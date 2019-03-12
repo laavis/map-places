@@ -14,10 +14,8 @@ $font_body: 'Open Sans', sans-serif;
 $font_bold: 700;
 $font_small: 0.75rem;
 
-// MEDIA QUERIES
+// SCREEN WIDTHS
 $screen-mobile-max: 576px;
-$screen-sm-desktop-max: 1000px;
-$screen-sm-desktop-min: 700px;
 
 // SHADOWS
 $shadow_card: 0 10px 40px rgba(0, 0, 0, 0.1), 0 4px 20px rgb(0, 0, 0, 0.2);
@@ -25,7 +23,11 @@ $shadow_card: 0 10px 40px rgba(0, 0, 0, 0.1), 0 4px 20px rgb(0, 0, 0, 0.2);
 $shadow-btn_dark-bg: 0px 2px 4px rgba(19, 46, 47, 0.1);
 $shadow-btn_dark-bg-hover: 0 6px 12px rgb(19, 46, 47, 0.1),
   0 3px 6px rgb(0, 0, 0, 0.1);
+$shadow-btn_dark-bg-active: 0 4px 10px rgba(19, 46, 47, 0.25),
+  0 1px 3px rgba(0, 0, 0, 0.25);
 
 $shadow-btn_light-bg: 0px 2px 4px rgba(0, 0, 0, 0.1);
 $shadow-btn_light-bg-hover: 0 6px 12px rgba(255, 139, 86, 0.1),
   0 3px 6px rgb(0, 0, 0, 0.1);
+$shadow-btn_ligth-bg-active: 0 4px 10px rgba(255, 139, 86, 0.25),
+  0 1px 3px rgba(0, 0, 0, 0.25);

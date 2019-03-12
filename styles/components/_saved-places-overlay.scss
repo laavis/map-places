@@ -1,5 +1,4 @@
 .saved-places-overlay {
-  // display: none;
   position: absolute;
   width: 260px;
   right: -2rem;
@@ -8,6 +7,16 @@
   overflow: scroll;
   z-index: 1;
 
+  @include mobile {
+    display: none;
+    padding: 0;
+    height: 50%;
+    width: 100%;
+    left: 0;
+    animation: none;
+    overflow: scroll;
+  }
+
   .place-container {
     padding: 1rem;
     margin-bottom: 1rem;
@@ -15,6 +24,10 @@
     border-radius: 4px;
     background-color: $color_white;
     box-shadow: 0px 2px 4px rgba(19, 46, 47, 0.2);
+
+    @include mobile {
+      margin: 1rem;
+    }
 
     .title,
     .coordinates {
@@ -76,6 +89,12 @@
 .active {
   display: block;
   animation: places-in 0.25s ease-out forwards;
+
+  @include mobile {
+    animation: none;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .hide {
