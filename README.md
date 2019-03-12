@@ -1,19 +1,26 @@
-## Project setup
-
-- Configure Apache and allow .htaccess "AllowOverride All"
+## Project dependencies
+- PHP 7  
+- Apache 2  
+- SQLite3
 
 ```
-sudo nano /etc/apache2/sites-enabled/000-default.conf
+sudo apt-get install apache2 php7.0 sqlite php7.0-sqlite3
+```
 
-...
+## Project setup
+- Clone repository to `/var/www/html`
+
+- Configure Apache and allow .htaccess files  
+Add to the end of `sudo nano /etc/apache2/sites-enabled/000-default.conf`
+```
 <Directory /var/www/html>
   AllowOverride All
 </Directory>
 ```
 
 - env.php  
-  Rename env.example.php to env.php or create new file named env.php  
-  Replace 'key' with your Google Maps API key
+Rename env.example.php to env.php or create new file named env.php  
+Replace 'key' with your Google Maps API key
 
 - run createdb from project root
 
