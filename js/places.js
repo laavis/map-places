@@ -91,6 +91,7 @@ const addPlace = () => {
     .then(res => {
       createTags(res.id, tags, () => {
         tags = [];
+        delete data.id;
         getPlaces();
       });
     })
@@ -109,6 +110,7 @@ const editPlace = () => {
 
   fetch('api/places.php', settings)
     .then(res => {
+      delete data.id;
       getPlaces();
     })
     .catch(console.error());
@@ -124,6 +126,7 @@ const deletePlace = id => {
 
   fetch('api/places.php', settings)
     .then(res => {
+      delete data.id;
       getPlaces();
     })
     .catch(console.error());
