@@ -18,7 +18,7 @@
     echo json_encode(array_merge(array("success"=>true), $data));
   }
 
-  function search_by_tile_or_tag($db, $data) {
+  function search_by_title_or_tag($db, $data) {
     $query = 'SELECT
       p.id,
       p.title,
@@ -28,9 +28,10 @@
       p.opens_at,
       p.closes_at
       FROM place p
-      JOIN place_tag pt ON p.id = pt.place_id
-      JOIN tag t ON t.id = pt.tag_id
-      WHERE t.label LIKE :search_tag OR p.title LIKE :search_title';
+      LEFT JOIN place_tag pt ON p.id = pt.place_id
+      LEFT JOIN tag t ON t.id = pt.tag_id
+      WHERE t.label LIKE :search_tag OR p.title LIKE :search_title
+      GROUP BY p.id';
 
       $tag = "%";
       if (!empty($data->search_tag)) {
@@ -51,5 +52,5 @@
       echo json_encode($results);
   }
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') search_by_tile_or_tag($db, $data);
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') search_by_title_or_tag($db, $data);
 ?>
