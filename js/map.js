@@ -307,7 +307,6 @@ const showMarkers = map => {
 function deleteMarkers() {
   clearMarkers();
   markers = [];
-  getPlacesFromDb();
 }
 
 const createMarker = place => {
