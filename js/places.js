@@ -31,17 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.forEach((value, key) => {
       data[key] = value;
     });
+
     if (formState === 'add') {
-      console.log(data);
-      addPlace();
       resetTagsUi();
-      renderNewMarker(data);
+      addPlace();
     } else if (formState === 'update') {
       resetTagsUi();
-      editPlace();
       clearMarkers();
       deleteMarkers();
-      renderNewMarker(data);
+      editPlace();
 
       const submitBtn = document.getElementById('submit-btn');
       const saveBtn = document.getElementById('save-btn');
