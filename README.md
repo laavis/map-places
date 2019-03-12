@@ -19,11 +19,10 @@ Add to the end of `sudo nano /etc/apache2/sites-enabled/000-default.conf`
 ```
 
 - env.php  
-Rename env.example.php to env.php or create new file named env.php  
-Replace 'key' with your Google Maps API key
+Rename `env.example.php` to `env.php`  
+Replace `key` with your Google Maps API key
 
-- run createdb from project root
-
+- Run `createdb.php` from project root to create the `places.db` SQLite database
 ```
 php ./db/createdb.php
 ```
