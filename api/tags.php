@@ -59,6 +59,9 @@
 
     if ($tag_id == null) {
       $tag_id = create_tag($db, $data->label);
+      if ($tag_id == null) {
+        return show_error("Failed to create tag");
+      }
     }
 
     if (check_duplicates($db, $data)) return show_error('Tag already exists');

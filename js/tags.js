@@ -16,8 +16,10 @@ const addTagsToUi = () => {
       }
 
       const valueLowerCase = value.toLowerCase();
-      createTagUi(value);
       tags.push(valueLowerCase);
+
+      createTagUi(value);
+
       if (data.id) {
         addTag(data.id, valueLowerCase);
       }

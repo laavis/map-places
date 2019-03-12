@@ -62,7 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const createTags = (id, list, callback) => {
   const tag = list.shift();
-  console.log(tag);
+  if (!tag) {
+    return createTags(id, list, callback);
+  }
   addTag(id, tag).then(() => {
     if (list.length > 0) {
       createTags(id, list, callback);
